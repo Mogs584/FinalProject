@@ -18,10 +18,13 @@ func _process(delta):
 
 func _physics_process(delta):
 	if player:
+		print("Player detected!")
 		var direction = (player.global_position - global_position).normalized()
 		velocity = direction * speed
 		animated_sprite.flip_h = velocity.x > 0
-		if not animated_sprite.is_playing():
+		if not animated_sprite.is_playing() or animated_sprite.animation != "hit":
+			print("Play 'hit' animation")
+			animated_sprite.animation = "hit"
 			animated_sprite.play()
 	else:
 		velocity = Vector2.ZERO
@@ -30,14 +33,16 @@ func _physics_process(delta):
 	
 	move_and_slide()
 	
-	
+
 func _on_detection_range_area_entered(body):
 	if body.is_in_group("player"):
 		player = body
+		$AnimatedSprite2D.animation = "hit"
 
 func _on_detection_range_body_exited(body):
 	if body.is_in_group("player"):
 		player = null
+		$AnimatedSprite2D.animation = "idle"
 
 
 func _on_hit_player_body_entered(body):

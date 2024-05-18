@@ -78,7 +78,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_54msj"]
-radius = 296.422
+radius = 112.538
 
 [sub_resource type="GDScript" id="GDScript_rurby"]
 script/source = "extends Area2D
@@ -112,7 +112,7 @@ shape = SubResource("CircleShape2D_wf3wk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_bvg04")
-animation = &"walking"
+animation = &"dead"
 
 [node name="DetectionRange" type="Area2D" parent="."]
 

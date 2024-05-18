@@ -7,9 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://c04623b8pyovj" path="res://IDLE.png" id="5_4t7n5"]
 [ext_resource type="Texture2D" uid="uid://dd7ro3wukxsej" path="res://WALK.png" id="6_rxo0p"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_lbb8l"]
-radius = 20.0693
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_anr0s"]
 atlas = ExtResource("2_dwc7b")
 region = Rect2(0, 0, 96, 96)
@@ -255,17 +252,22 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_lbb8l"]
+radius = 20.0693
+
 [node name="player" type="CharacterBody2D" groups=["player"]]
 scale = Vector2(0.6, 0.6)
 collision_mask = 3
 script = ExtResource("1_7d3nk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_lul0c")
+animation = &"walking"
+frame = 7
+frame_progress = 0.751307
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_lbb8l")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_lul0c")
-animation = &"attack"
