@@ -1,3 +1,131 @@
-[gd_scene format=3 uid="uid://jsj7c87a8jvj"]
+[gd_scene load_steps=15 format=3 uid="uid://jsj7c87a8jvj"]
 
-[node name="enemy" type="Node2D"]
+[ext_resource type="Script" path="res://code/enemy.gd" id="1_cbebx"]
+[ext_resource type="Texture2D" uid="uid://dwmrhnxyrh605" path="res://Animations/DeadAnimation1.png" id="1_xs5ef"]
+[ext_resource type="Texture2D" uid="uid://2ln0s0t5l3f" path="res://Animations/DeadAnimation2.png" id="2_6qvip"]
+[ext_resource type="Texture2D" uid="uid://d1uydly7jw3ri" path="res://Animations/DeadAnimation3.png" id="3_815b4"]
+[ext_resource type="Texture2D" uid="uid://exxgjsvsdt0t" path="res://Animations/HitAnimation1.png" id="4_3vtkm"]
+[ext_resource type="Texture2D" uid="uid://b58bgfnu0mxcv" path="res://Animations/HitAnimation2.png" id="5_tcomv"]
+[ext_resource type="Texture2D" uid="uid://bf0e67wl5qrlx" path="res://Animations/StunnedAnimation.png" id="6_quwqj"]
+[ext_resource type="Texture2D" uid="uid://cf2t0iau7hloy" path="res://Animations/RunningAnimation1.png" id="7_mhsoo"]
+[ext_resource type="Texture2D" uid="uid://kbltox2mwgnk" path="res://Animations/RunningAnimation2.png" id="8_nny2v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wf3wk"]
+radius = 20.834
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bvg04"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_xs5ef")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_6qvip")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_815b4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_815b4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_815b4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_815b4")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_3vtkm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_tcomv")
+}],
+"loop": true,
+"name": &"hit",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_3vtkm")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_quwqj")
+}],
+"loop": true,
+"name": &"stunned",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_mhsoo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_nny2v")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_54msj"]
+radius = 296.422
+
+[sub_resource type="GDScript" id="GDScript_rurby"]
+script/source = "extends Area2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m525s"]
+radius = 21.375
+
+[node name="enemy" type="CharacterBody2D"]
+scale = Vector2(0.75, 0.75)
+collision_layer = 4
+collision_mask = 6
+script = ExtResource("1_cbebx")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3.5, -9.5)
+shape = SubResource("CircleShape2D_wf3wk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_bvg04")
+animation = &"walking"
+
+[node name="DetectionRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRange"]
+shape = SubResource("CircleShape2D_54msj")
+
+[node name="Hit Player" type="Area2D" parent="."]
+script = SubResource("GDScript_rurby")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hit Player"]
+position = Vector2(-2.66667, -8)
+shape = SubResource("CircleShape2D_m525s")
+
+[connection signal="body_entered" from="DetectionRange" to="." method="_on_detection_range_area_entered"]
+[connection signal="body_exited" from="DetectionRange" to="." method="_on_detection_range_body_exited"]
+[connection signal="body_entered" from="Hit Player" to="." method="_on_hit_player_body_entered"]

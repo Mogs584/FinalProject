@@ -1,11 +1,30 @@
-[gd_scene load_steps=3 format=3 uid="uid://bkn4el3u238ra"]
+[gd_scene load_steps=6 format=3 uid="uid://bkn4el3u238ra"]
 
 [ext_resource type="PackedScene" uid="uid://covr4mwubtam" path="res://scenes/map.tscn" id="1_bm5g7"]
 [ext_resource type="PackedScene" uid="uid://bi2878qu5tbog" path="res://scenes/player.tscn" id="2_rldwf"]
+[ext_resource type="PackedScene" uid="uid://hbibkt4k8cqb" path="res://scenes/cover_player.tscn" id="3_3gfxa"]
+[ext_resource type="PackedScene" uid="uid://2xp5bu13qcua" path="res://scenes/enemy_spawner.tscn" id="4_k7o5b"]
+[ext_resource type="PackedScene" uid="uid://jsj7c87a8jvj" path="res://scenes/enemy.tscn" id="5_32gsr"]
 
 [node name="main" type="Node2D"]
 
 [node name="map" parent="." instance=ExtResource("1_bm5g7")]
+position = Vector2(0, 192)
+metadata/_edit_lock_ = true
 
 [node name="player" parent="." instance=ExtResource("2_rldwf")]
-scale = Vector2(0.3, 0.3)
+position = Vector2(151, 494)
+collision_mask = 2
+
+[node name="coverPlayer" parent="." instance=ExtResource("3_3gfxa")]
+position = Vector2(0, 192)
+metadata/_edit_lock_ = true
+
+[node name="enemy spawner" parent="." instance=ExtResource("4_k7o5b")]
+enemy_tscn = ExtResource("5_32gsr")
+metadata/_edit_lock_ = true
+
+[node name="Timer" type="Timer" parent="enemy spawner"]
+autostart = true
+
+[connection signal="timeout" from="enemy spawner/Timer" to="enemy spawner" method="spawn_enemy"]
