@@ -9,11 +9,14 @@ func _process(delta):
 	
 	if velocity.length() > 0:
 		$AnimatedSprite2D.animation = "walking"
+		$AnimatedSprite2D.play()
 	else:
+		velocity = Vector2.ZERO
 		$AnimatedSprite2D.animation = "idle"
+		$AnimatedSprite2D.play()
+		
 	if velocity.x != 0:
 		$AnimatedSprite2D.flip_h = velocity.x > 0
-
 
 
 func _physics_process(delta):
@@ -26,6 +29,7 @@ func _physics_process(delta):
 			print("Play 'hit' animation")
 			animated_sprite.animation = "hit"
 			animated_sprite.play()
+			
 	else:
 		velocity = Vector2.ZERO
 		animated_sprite.stop()
