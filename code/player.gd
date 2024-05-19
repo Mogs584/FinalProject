@@ -3,7 +3,10 @@ extends CharacterBody2D
 @export var speed: int = 50
 var screensize = Vector2(1152, 648)
 
+
+
 func _process(delta):
+	
 	var input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	
 	if input_vector.length() > 0:
