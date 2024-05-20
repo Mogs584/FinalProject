@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkn4el3u238ra"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_74dx0"]
+[ext_resource type="PackedScene" uid="uid://jsj7c87a8jvj" path="res://scenes/enemy.tscn" id="2_iwm22"]
+[ext_resource type="PackedScene" uid="uid://covr4mwubtam" path="res://scenes/map.tscn" id="3_vk4ib"]
+[ext_resource type="PackedScene" uid="uid://bi2878qu5tbog" path="res://scenes/player.tscn" id="4_v102u"]
+
+[node name="partOfMain" type="Node2D"]
+script = ExtResource("1_74dx0")
+enemy_tscn = ExtResource("2_iwm22")
+
+[node name="map" parent="." instance=ExtResource("3_vk4ib")]
+metadata/_edit_lock_ = true
+
+[node name="player" parent="." instance=ExtResource("4_v102u")]
+position = Vector2(151, 494)
+collision_mask = 2

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bf11v2pdgntjq"]
+
+[ext_resource type="PackedScene" uid="uid://bkn4el3u238ra" path="res://scenes/partOfMain.tscn" id="1_65mxe"]
+[ext_resource type="PackedScene" uid="uid://hbibkt4k8cqb" path="res://scenes/cover_player.tscn" id="2_fmjyg"]
+
+[node name="Main" type="Node2D"]
+metadata/_edit_lock_ = true
+
+[node name="partOfMain" parent="." instance=ExtResource("1_65mxe")]
+metadata/_edit_lock_ = true
+
+[node name="coverPlayer" parent="." instance=ExtResource("2_fmjyg")]
+position = Vector2(-6, 185)
+metadata/_edit_lock_ = true

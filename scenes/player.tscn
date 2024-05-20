@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bi2878qu5tbog"]
+[gd_scene load_steps=41 format=3 uid="uid://bi2878qu5tbog"]
 
 [ext_resource type="Script" path="res://code/player.gd" id="1_7d3nk"]
 [ext_resource type="Texture2D" uid="uid://cuu1f17ljgvoi" path="res://ATTACK.png" id="2_dwc7b"]
@@ -253,7 +253,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lbb8l"]
-radius = 20.0693
+radius = 18.3333
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cldj7"]
+radius = 18.3333
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
 scale = Vector2(0.6, 0.6)
@@ -271,3 +274,10 @@ shape = SubResource("CircleShape2D_lbb8l")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
+
+[node name="EnemyCollision" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyCollision"]
+shape = SubResource("CircleShape2D_cldj7")
+
+[connection signal="body_entered" from="EnemyCollision" to="." method="_on_enemy_collision_body_entered"]
