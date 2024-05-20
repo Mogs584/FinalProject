@@ -39,7 +39,6 @@ func _physics_process(delta):
 	
 	move_and_slide()
 	
-
 func _on_detection_range_area_entered(body):
 	if body.is_in_group("player"):
 		player = body
